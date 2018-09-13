@@ -1,0 +1,26 @@
+path: /<entity>/fields/<field>/valuePath
+options: /<entity>/fields/<field>/options
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+toggled: <path>/value
+---
+nolist nolabel norequired
+---
+.measure.pv2(data-name="entity-selection")
+  heading-label(v-if="!nolabel && label", :for="'field-' + entity + '-' + field", :text="label")
+
+  .flex.flex-wrap
+    .dib(
+      v-for="option in options",
+      :class="toggled && toggled[option.id] ? 'pv2 ph3 ba f3 dib mr2 mb2 bfg-n5' : 'pv2 ph3 ba f3 dib mr2 mb2'"
+      :data-patch="(toggled && toggled[option.id]) ? 'remove ' + path + '/value/' + option.id : 'add ' + path + '/value/' + option.id + ' true'"
+    ) {{ option.title }}
+
+  .f6(v-if="error && error.isSubmitted") {{ error.message }}
+  .f6(v-if="!!required && !norequired") {{ required }}

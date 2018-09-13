@@ -1,0 +1,37 @@
+path: /<entity>/fields/<field>/valuePath
+options: /<entity>/fields/<field>/options
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+isRequired: /<entity>/fields/<field>/required
+---
+nolist nolabel norequired inline
+---
+.measure.pv2.relative(data-name="entity-choice")
+  .f5.pv3.fg-n4.mb1.pointer(v-if="!nolabel && label", :for="'field-' + path")
+    .di {{ label }}
+    .di.b(v-if="inline && value") &nbsp; {{ value }}
+  .f1.absolute.top-0.right-0.ttu.o-30.b.pa1.fg-danger(v-if="isRequired === true") required
+
+  .db(
+    :class="inline ? 'overflow-x-auto' : ''"
+  )
+    .flex(
+      :class="inline ? '' : 'flex-wrap'"
+    )
+      .mb2(
+        v-for="(option, idx) in options",
+        :class="idx === options.length - 1 ? '' : 'mr2'"
+        :data-patch="(value && value == option.id) ? 'remove ' + path + '/value' : 'add ' + path + '/value \"' + option.id + '\"'"
+      )
+        div(
+          :class="value && value == option.id ? 'pv3 ph4 ba f3 dib bfg-n5' : 'pv3 ph4 ba f3 dib'"
+        ) {{ option.title }}
+
+  .f6(v-if="error && error.isSubmitted") {{ error.message }}
+  .f6(v-if="!!required && !norequired") {{ required }}

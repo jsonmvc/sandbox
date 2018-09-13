@@ -1,0 +1,9 @@
+type: object
+patternProperties:
+  # entityId
+  '.*':
+    type: object
+    patternProperties:
+      # ns
+      '.*':
+        $ref: ../../types/field.yml

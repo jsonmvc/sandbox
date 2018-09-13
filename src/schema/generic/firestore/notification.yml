@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: string
+  type:
+    type: string
+    enum:
+    - sms
+    - push
+    - email
+  message:
+    type: object
+    properties:
+      body:
+        type: string
+      title:
+        type: string
+  recipient:
+    type: object
+required:
+- recipient
+- type
+- id

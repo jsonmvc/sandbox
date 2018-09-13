@@ -1,0 +1,20 @@
+type: object
+properties:
+  apiKey:
+    type: string
+    default: __FIREBASE_APIKEY__
+  authDomain:
+    type: string
+    default: __FIREBASE_AUTHDOMAIN__
+  databaseURL:
+    type: string
+    default: __FIREBASE_DATABASEURL__
+  projectId:
+    type: string
+    default: __FIREBASE_PROJECTID__
+  storageBucket:
+    type: string
+    default: __FIREBASE_STORAGEBUCKET__
+  messagingSenderId:
+    type: string
+    default: __FIREBASE_MESSAGINGSENDERID__

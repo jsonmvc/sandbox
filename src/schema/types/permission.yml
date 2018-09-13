@@ -1,0 +1,5 @@
+allOf:
+- $ref: ../generic/types/permission.yml
+- properties:
+    statistics:
+      default: false

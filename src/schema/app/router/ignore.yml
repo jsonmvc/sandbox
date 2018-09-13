@@ -1,0 +1,5 @@
+type: array
+default:
+  - home
+  - user-dashboard
+  - admin-dashboard

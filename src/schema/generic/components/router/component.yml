@@ -1,0 +1,8 @@
+type: object
+properties:
+  ignore:
+    $ref: ignore.yml
+  default:
+    $ref: default.yml
+  nav:
+    $ref: nav.yml

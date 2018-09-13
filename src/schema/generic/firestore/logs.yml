@@ -1,0 +1,7 @@
+type: object
+collection: true
+properties:
+  patch:
+    type: array
+    items:
+      $ref: ../../types/patch.yml

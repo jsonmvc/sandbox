@@ -1,0 +1,25 @@
+path: /<entity>/fields/<field>/valuePath
+label: /<entity>/fields/<field>/label
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+---
+disabled nolabel nolist norequired
+---
+.mb3.measure(data-name="entity-checkbox")
+  .flex.items-center
+    .mr2.lh-none
+      icon-check-alt.h2(
+        :id="'field-' + path",
+        v-if="value"
+        :data-patch="'add ' + (path + '/value') + ' false' + (submit ? ' ; remove ' + submit  : '')"
+      )
+      icon-cancel-squared.h2(
+        v-else
+        :id="'field-' + path",
+        :data-patch="'add ' + (path + '/value') + ' true' + (submit ? ' ; remove ' + submit  : '')"
+      )
+    .f5(v-if="!nolabel && label") {{ label }}

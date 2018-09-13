@@ -1,0 +1,17 @@
+---
+id label placeholder path value items
+---
+.measure(data-name="select")
+  heading-label(v-if="label", :for="'field-' + id", :text="label")
+
+  select.pa2.mb2.db.w-100.bg-n1.ba.b--n2(
+    type="text",
+    :id="'field-' + id",
+    :data-patch="'add ' + path + ' attr.value'",
+    v-model="value"
+  )
+    option(value="") {{ placeholder }}
+    option(
+      v-for="(item, key) in items",
+      :value="key"
+    ) {{ item.name }}

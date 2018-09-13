@@ -1,0 +1,11 @@
+type: object
+properties:
+  id:
+    type: string
+  profile:
+    $ref: profile.yml
+  protected:
+    $ref: protected.yml
+required:
+- id
+- profile

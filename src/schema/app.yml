@@ -1,0 +1,41 @@
+type: object
+properties:
+
+  ##########
+  # User
+  ##########
+  user:
+    allOf:
+    - $ref: app/user.yml
+    - properties:
+        fields:
+          $ref: entities/user/fields.yml
+        action:
+          $ref: generic/components/ui/action.yml
+        entity:
+          $ref: entities/user/entity.yml
+
+   
+  ##########
+  # Router
+  ##########
+  router:
+    $ref: app/router/entity.yml
+
+  ##########
+  # Firebase
+  ##########
+  firebase:
+    $ref: app/firebase/entity.yml
+
+  ##########
+  # Config
+  ##########
+  config:
+    allOf:
+    - $ref: generic/app/config.yml
+    - properties:
+        app:
+          properties:
+            title:
+              default: JSONMVC Sandbox

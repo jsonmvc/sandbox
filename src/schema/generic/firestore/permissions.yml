@@ -1,0 +1,13 @@
+type: object
+collection: true
+patternProperties:
+  # uid
+  '.*':
+    type: object
+    patternProperties:
+      # entityId
+      '.*':
+        type: object
+        patternProperties:
+          '.*'
+            $ref: ../types/permission.yml

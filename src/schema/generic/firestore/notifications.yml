@@ -1,0 +1,7 @@
+type: object
+collection: true
+patternProperties:
+  '.*':
+    allOf:
+    - $ref: notification.yml
+    - $ref: meta.yml

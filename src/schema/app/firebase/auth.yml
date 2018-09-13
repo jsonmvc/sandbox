@@ -1,0 +1,5 @@
+type: object
+properties:
+  timeout:
+    type: number
+    default: 60000

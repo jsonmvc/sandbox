@@ -1,0 +1,48 @@
+fPath: /<entity>/fields/<field>/valuePath
+fLabel: /<entity>/fields/<field>/label
+fPlaceholder: /<entity>/fields/<field>/placeholder
+fieldValue: <fPath>/value
+storedValue: /<entity>/<field>
+fError: <fPath>/error
+fSubmit: /<entity>/fields/<field>/submitPath
+---
+id label placeholder path disabled value submit icon version
+---
+.mb3.measure(data-name="text")
+  heading-label(:for="'field-' + (path ? path : fPath)", v-if="fLabel || label", :text="label ? label : fLabel")
+
+  p(v-if="fError && fError.isSubmitted") {{ fError.message }}
+
+  //- because vue uses v-model literal it cannot contain a conditional
+  //- and as such we need to create two inputs
+  input.ba.pa2.mb2.db.w-100.bfg-n2.br2(
+    v-if="value !== undefined",
+    type="text",
+    :id="'field-' + (path ? path : fPath)",
+    :placeholder="placeholder ? placeholder : fPlaceholder",
+    :data-patch="!(path || fPath) ? false : 'add ' + (path ? path : fPath + '/value') + ' attr.value' + ((submit || fSubmit) ? ' ; remove ' + (submit || fSubmit)  : '')"
+    v-model="value",
+    :disabled="disabled",
+    :class="[!!fError ? 'b--d5' : 'b--n2', version == 'white' ? '' : 'bfg-n2']"
+  )
+  input.ba.pa2.mb2.db.w-100.bfg-n2.br2(
+    v-else-if="fieldValue !== undefined",
+    type="text",
+    :id="'field-' + (path ? path : fPath)",
+    :placeholder="placeholder ? placeholder : fPlaceholder",
+    :data-patch="!(path || fPath) ? false : 'add ' + (path ? path : fPath + '/value') + ' attr.value' + ((submit || fSubmit) ? ' ; remove ' + (submit || fSubmit)  : '')"
+    v-model="fieldValue",
+    :disabled="disabled", 
+    :class="[!!fError ? 'b--d5' : 'b--n2', version == 'white' ? '' : 'bfg-n2']"
+  )
+  input.ba.pa2.mb2.db.w-100.br2(
+    v-else="storedValue",
+    type="text",
+    :id="'field-' + (path ? path : fPath)",
+    :placeholder="placeholder ? placeholder : fPlaceholder",
+    :data-patch="!(path || fPath) ? false : 'add ' + (path ? path : fPath + '/value') + ' attr.value' + ((submit || fSubmit) ? ' ; remove ' + (submit || fSubmit)  : '')"
+    v-model="storedValue",
+    :disabled="disabled",
+    :class="[!!fError ? 'b--d5' : 'b--n2', version == 'white' ? '' : 'bfg-n2']"
+  )
+    

@@ -1,0 +1,6 @@
+type: object
+properties:
+  app:
+    $ref: app.yml
+  ui:
+    $ref: ui.yml

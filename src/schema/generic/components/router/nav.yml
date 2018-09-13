@@ -1,0 +1,13 @@
+type: object
+patternProperties:
+  '.*':
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        icon:
+          type: string
+        link:
+          type: string

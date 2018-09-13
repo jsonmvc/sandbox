@@ -1,0 +1,56 @@
+path: /<entity>/fields/<field>/valuePath
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+---
+disabled nolabel nolist norequired temp inline right noerror nomargin fieldstyle labelclasses labelstyle datatype fieldclasses
+---
+.db(:class="inline ? 'flex' : nomargin ? '' : 'mb3'", data-name="entity-textarea")
+  .f5.pv2.pointer(v-if="!nolabel && label", :for="'field-' + path", :class="labelclasses ? labelclasses : inline ? 'mr2' : 'mb1'") {{ label }}
+
+  //- The nolist flag is hack for the "user" entity scenario
+  //- that doesn't it's information stored under the entity/list/id/data
+  //- structure but at it's root entity/data
+
+  //- because vue uses v-model literal it cannot contain a conditional
+  //- and as such we need to create more inputs
+
+  .db.w-100(:class="inline ? '' : nomargin ? '' : 'mb2'")
+    textarea.ba.pa2.db.bfg-n1.br1.w-100(
+      v-if="value !== undefined || (!id && !nolist)",
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="value",
+      :disabled="disabled",
+      :class="((!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1') + (fieldclasses ? ' ' + fieldclasses : '')",
+      :style="fieldstyle ? fieldstyle : ''"
+    )
+    textarea.ba.pa2.db.bfg-n1.br1.w-100(
+      v-else-if="nolist",
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueRoot",
+      :disabled="disabled",
+      :class="((!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1') + (fieldclasses ? ' ' + fieldclasses : '')",
+      :style="fieldstyle ? fieldstyle : ''"
+    )
+    textarea.ba.pa2.db.bfg-n1.br1.w-100(
+      v-else,
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueList",
+      :disabled="disabled",
+      :class="((!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1') + (fieldclasses ? ' ' + fieldclasses : '')",
+      :style="fieldstyle ? fieldstyle : ''"
+    )
+
+  .f6(v-if="error && error.isSubmitted") {{ error.message }}
+  .f6(v-if="!!required && !norequired") {{ required }}

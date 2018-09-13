@@ -1,0 +1,47 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // !!!!!
+    // Remember to protected against agressive reads and writes
+    // !!!!!!
+
+    function isAdmin() {
+      return get(/databases/$(database)/documents/entities/$(request.auth.uid)/admin/authorization).data.valid == true
+    }
+
+    // --------
+    // Users
+    // --------
+    match /users/{id} {
+
+      function isUser() {
+        return auth.uid == id
+          && request.resource.data.type == 'user'
+          && request.resource.data.profile.gender in [0, 1, 2, 9]
+          && request.resource.data.profile.firstName is string
+          && request.resource.data.profile.lastName is string
+          && request.resource.data.profile.locale.matches('[a-z]{2}_[A-Z]{2}')
+          && request.resource.data.profile.timezone is int
+      }
+
+      function isOwner() {
+        return request.auth.uid == id
+      }
+
+      allow write: if isUser();
+      allow read;
+
+      match /meta/{doc=**} {
+        allow read, write: if isOwner() || isAdmin();
+      }
+
+      match /providers/{doc=**} {
+        allow read, write: if isOwner() || isAdmin();
+      }
+
+      match /admin/{doc=**} {
+        allow read, write: if isAdmin();
+      }
+    }
+  }
+}

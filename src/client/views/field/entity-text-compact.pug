@@ -1,0 +1,65 @@
+path: /<entity>/fields/<field>/valuePath
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+suffix: /<entity>/fields/<field>/suffix
+---
+disabled nolabel nolist norequired temp inline right noerror datatype
+---
+.measure(:class="inline ? 'flex' : 'mb3'", data-name="entity-text-compact")
+  
+  .w-100.relative(:class="inline ? '' : 'mb2'")
+
+    .relative(:class="suffix ? 'pr3' : ''")
+      input.ba.pv1.db.w-100.bfg-n1.ph1.br1(
+        data-input-type="value",
+        v-if="value !== undefined || (!id && !nolist)",
+        type="text",
+        :id="'field-' + path",
+        :placeholder="placeholder",
+        :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+        :data-type="datatype",
+        v-model="value",
+        :disabled="disabled",
+        :data-entity="entity",
+        :data-field="field",
+        :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1'"
+      )
+      input.ba.pv1.db.w-100.bfg-n1.ph1.br1(
+        data-input-type="nolist",
+        v-else-if="nolist",
+        type="text",
+        :id="'field-' + path",
+        :placeholder="placeholder",
+        :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+        :data-type="datatype",
+        v-model="storedValueRoot",
+        :disabled="disabled",
+        :data-entity="entity",
+        :data-field="field",
+        :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1'"
+      )
+      input.ba.pv1.db.w-100.bfg-n1.ph1.br1(
+        data-input-type="novalue",
+        v-else,
+        type="text",
+        :id="'field-' + path",
+        :placeholder="placeholder",
+        :data-patch="'add ' + (path + '/' + (temp ? 'temp' : '') + 'timestamp') + ' /time/ms; add ' + (path + '/' + (temp ? 'temp' : '') + 'value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+        :data-type="datatype",
+        v-model="storedValueList",
+        :disabled="disabled",
+        :data-entity="entity",
+        :data-field="field",
+        :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--p1'"
+      )
+
+    .absolute.top-0.bottom-0.right-0.flex.justify-center.items-center(v-if="suffix") {{ suffix }}
+
+  .f6(v-if="error && error.isSubmitted") {{ error.message }}
+  .f6(v-if="!!required && !norequired") {{ required }}

@@ -1,0 +1,9 @@
+allOf:
+- $ref: ../../generic/components/router/component.yml
+- properties:
+    ignore:
+      $ref: ignore.yml
+    default:
+      $ref: default.yml
+    nav:
+      $ref: nav.yml

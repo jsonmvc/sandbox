@@ -1,0 +1,11 @@
+type: object
+properties:
+  mount:
+    type: object
+    properties:
+      root:
+        type: string
+        default: '#app'
+      view:
+        type: string
+        default: app

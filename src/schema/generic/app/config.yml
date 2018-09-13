@@ -1,0 +1,9 @@
+type: object
+properties:
+  app:
+    type: object
+    properties:
+      title:
+        type: string
+  ui:
+    $ref: ../components/ui/config.yml

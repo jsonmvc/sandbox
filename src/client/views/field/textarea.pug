@@ -1,0 +1,14 @@
+---
+id label placeholder path value disabled
+---
+.measure.mb3(data-name="textarea")
+  heading-label(v-if="label", :for="'field-' + id", :text="label")
+
+  textarea.h4.input-reset.ba.b--n2.lh-copy.pa2.mb2.db.w-100.bfg-n1(
+    type="text",
+    :id="'field-' + id",
+    :placeholder="placeholder",
+    :data-patch="'add ' + path + ' [value]'",
+    v-model="value",
+    :disabled="disabled"
+  )

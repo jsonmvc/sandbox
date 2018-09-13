@@ -1,0 +1,3 @@
+allOf:
+#- $ref: ../generic/app/user.yml
+- $ref: ../entities/user/entity.yml

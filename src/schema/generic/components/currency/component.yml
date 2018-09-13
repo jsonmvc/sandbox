@@ -1,0 +1,16 @@
+type: object
+patternProperties:
+  '.*':
+    type: object
+    properties:
+      name:
+        type: string
+      symbol:
+        $ref: ../../types/currencySymbol.yml
+      code:
+        $ref: ../../types/currencyCode.yml
+      exchange:
+        type: object
+        patternProperties:
+          '^[A-Z]{3}$':
+            $ref: ../../types/currencyValue.yml

@@ -1,0 +1,12 @@
+type: object
+collection: true
+patternProperties:
+  # uid  
+  '.*':
+    allOf:
+    - $ref: ../entities/user/entity.yml
+    - $ref: ../types/meta.yml
+    - type: object
+      properties:
+        meta:
+          collection: true

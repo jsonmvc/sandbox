@@ -1,0 +1,11 @@
+type: object
+properties:
+  visitor:
+    type: string
+    default: visitor-home
+  user:
+    type: string
+    default: user-invoices
+  admin:
+    type: string
+    default: admin-dashboard

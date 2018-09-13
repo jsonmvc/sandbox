@@ -1,0 +1,12 @@
+type: object
+patternProperties:
+  '.*':
+    type: boolean
+    default: false
+properties:
+  create:
+    default: false
+  read:
+    default: false
+  write:
+    default: false

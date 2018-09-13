@@ -1,0 +1,56 @@
+path: /<entity>/fields/<field>/valuePath
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+---
+disabled nolabel nolist norequired percent inline nomargin
+---
+.measure(:class="inline ? 'flex' : nomargin ? '' : 'mb3'", data-name="entity-number")
+  .f5.pv2.pointer(v-if="!nolabel && label", :for="'field-' + path", :class="inline ? 'mr2' : 'mb1'") {{ label }}
+
+  //- The nolist flag is hack for the "user" entity scenario
+  //- that doesn't it's information stored under the entity/list/id/data
+  //- structure but at it's root entity/data
+
+  //- because vue uses v-model literal it cannot contain a conditional
+  //- and as such we need to create more inputs
+  .relative(:style="percent ? 'width: 5em;' : 'width: auto;'")
+    input.ba.pa2.mb2.db.w-100.bfg-n1.font-mono(
+      v-if="value !== undefined || (!id && !nolist)",
+      type="number",
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="value",
+      :disabled="disabled",
+      :class="(!!error || (!!required && !norequired))? 'b--d5' : 'b--n2'"
+    )
+    input.ba.pa2.mb2.db.w-100.bfg-n1.font-mono(
+      v-else-if="nolist",
+      type="number",
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueRoot",
+      :disabled="disabled",
+      :class="(!!error || (!!required && !norequired))? 'b--d5' : 'b--n2'"
+    )
+    input.ba.pa2.mb2.db.w-100.bfg-n1.font-mono(
+      v-else,
+      type="number",
+      :id="'field-' + path",
+      :placeholder="placeholder",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueList",
+      :disabled="disabled",
+      :class="(!!error || (!!required && !norequired))? 'b--d5' : 'b--n2'"
+    )
+    .absolute.top-0.right-1.b.o-50.h-100.flex.items-center(v-if="percent") %
+
+    .f6(v-if="error && error.isSubmitted") {{ error.message }}
+    .f6(v-if="!!required && !norequired") {{ required }}

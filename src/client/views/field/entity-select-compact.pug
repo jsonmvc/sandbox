@@ -1,0 +1,57 @@
+path: /<entity>/fields/<field>/valuePath
+options: /<entity>/fields/<field>/options
+label: /<entity>/fields/<field>/label
+placeholder: /<entity>/fields/<field>/placeholder
+value: <path>/value
+storedValueList: /<entity>/list/<id>/<field>
+storedValueRoot: /<entity>/<field>
+error: <path>/error
+required: /<entity>/action/errors/store/required/<field>
+submit: /<entity>/fields/<field>/submitPath
+---
+nolist nolabel norequired noerror
+---
+.measure.pv2(data-name="entity-select-compact")
+
+  .relative
+    select.pv2.mb2.db.w-100.bg-n1.ba.b--n2.font-mono(
+      v-if="value !== undefined || (!id && !nolist)",
+      type="text",
+      :id="'field-' + entity + '-' + field",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="value",
+      :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--n2'"
+    )
+      option(value, disabled, selected) {{ placeholder }}
+      option(
+        v-for="item in options",
+        :value="item.id"
+      ) {{ item.text }}
+
+    select.pv2.mb2.db.w-100.bg-n1.ba.b--n2.font-mono(
+      v-else-if="nolist",
+      type="text",
+      :id="'field-' + entity + '-' + field",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueRoot",
+      :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--n2'"
+    )
+      option(value="", selected) {{ placeholder }}
+      option(
+        v-for="item in options",
+        :value="item.id"
+      ) {{ item.text }}
+
+    select.pv2.mb2.db.w-100.bg-n1.ba.b--n2.font-mono(
+      v-else,
+      type="text",
+      :id="'field-' + entity + '-' + field",
+      :data-patch="'add ' + (path + '/value') + ' attr.value' + (submit ? ' ; remove ' + submit  : '')"
+      v-model="storedValueList",
+      :class="(!noerror && (!!error || (!!required && !norequired))) ? 'b--d5' : 'b--n2'"
+    )
+      option(value="", selected) {{ placeholder }}
+      option(
+        v-for="item in options",
+        :value="item.id"
+      ) {{ item.text }}

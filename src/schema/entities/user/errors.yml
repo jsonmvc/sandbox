@@ -1,0 +1,10 @@
+auth:
+  userNotFound: Emailul sau parola nu coincid
+  default: A intervenit o eroare
+signup:
+  'auth/invalid-email': Emailul nu este valid
+  'auth/password-not-confirmed': Parola nu este confirmata
+  'auth/email-already-in-use': Emailul este deja folosit
+  'auth/operation-not-allowed': Pentru nnu moment nu se pot crea useri noi. Va rugam incercati mai tarziu
+  'auth/weak-password': Parola nu este suficient de puternica adauga cifre si majuscule
+  default: A intervenit o eroare

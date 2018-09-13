@@ -1,0 +1,38 @@
+type: object
+allOf:
+- $ref: ../../components/ui/fields.yml
+- type: object
+  properties:
+    profile:
+      type: object
+      properties:
+        email:
+          default:
+            placeholder: Email
+            label: Your business email
+        firstName:
+          default:
+            placeholder: First name
+            label: Enter your first name
+        lastName:
+          default:
+            placeholder: Last name
+            label: Enter your last name
+        gender:
+          default:
+            placeholder: Male/Female
+            label: Gender
+            options:
+              - text: Male
+                value: 1
+              - text: Female
+                value: 2
+
+    protected:
+      type: object
+      properties:
+        password:
+          default:
+            placeholder: Password
+            label: New password
+            triggers: changePassword

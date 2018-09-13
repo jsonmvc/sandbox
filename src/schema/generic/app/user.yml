@@ -1,0 +1,10 @@
+allOf:
+- $ref: ../entities/user/entity.yml
+- type: object
+  properties:
+    action:
+      $ref: ../components/ui/action.yml
+    fields:
+      $ref: ../entities/user/fields.yml
+    session:
+      $ref: ../entities/user/session.yml

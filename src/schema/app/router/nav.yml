@@ -1,0 +1,25 @@
+type: object
+patternProperties:
+  '.*':
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        icon:
+          type: string
+        link:
+          type: string
+properties:
+  admin:
+    default:
+      $ref: nav/admin.yml
+    
+  visitor:
+    default:
+      $ref: nav/visitor.yml
+
+  user:
+    default:
+      $ref: nav/user.yml

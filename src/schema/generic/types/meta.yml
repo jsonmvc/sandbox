@@ -1,0 +1,7 @@
+type: object
+properties:
+  created:
+    timestamp:
+      type: string
+    userId:
+      type: string

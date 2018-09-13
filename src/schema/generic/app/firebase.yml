@@ -1,0 +1,10 @@
+allOf:
+- $ref: ../components/firebase/component.yml
+- type: object
+  properties:
+    sync:
+      type: object
+      properties:
+        user:
+          default:
+            collection: users

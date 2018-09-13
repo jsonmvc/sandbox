@@ -1,0 +1,7 @@
+type: object
+collection: true
+properties:
+  google:
+    $ref: provider.yml
+  facebook:
+    $ref: provider.yml

@@ -1,0 +1,5 @@
+type: object
+properties:
+  password:
+    type: string
+    pattern: '^[A-Za-z0-9]{6}$'

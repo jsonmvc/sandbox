@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    type: string
+  data:
+    type: object
+    patternProperties:
+      # ns
+      '.*':
+        type: object
+        patternProperties:
+          # fieldName
+          '.*':
+              type: object
+              properties:
+                value:
+                  type: object
+                error:
+                  $ref: ../../types/error.yml
+              required:
+              - value
+              - error
+  errors:
+    type: object
+  type:
+    type: string
+    enum:
+    - create
+    - update
+    - delete
+  submit:
+    $ref: ../../types/timestamp.yml

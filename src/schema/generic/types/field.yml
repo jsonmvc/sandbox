@@ -1,0 +1,11 @@
+type: object
+properties:
+  label:
+    type: string
+  placeholder:
+    type: string
+  options:
+    type: array
+required:
+- label
+- placeholder

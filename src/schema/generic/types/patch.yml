@@ -1,0 +1,15 @@
+type: object
+properties:
+  op:
+    type: string
+    enum:
+    - add
+    - remove
+    - replace
+    - merge
+  value:
+    type: object
+  path:
+    type: string
+required:
+- op

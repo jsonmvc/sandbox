@@ -1,0 +1,6 @@
+type: object
+properties:
+  auth:
+    $ref: auth.yml
+  config:
+    $ref: config.yml
